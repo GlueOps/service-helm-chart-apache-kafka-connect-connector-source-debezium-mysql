@@ -1,0 +1,42 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: {{ .Values.job_name }}
+  # Use this in prod and delete the one above
+  # name: cdc-poc-change-event-my-memories
+  labels:
+    app: {{ .Values.job_name }}
+    # The strimzi.io/cluster label identifies the KafkaConnect instance
+    # in which to create this connector. That KafkaConnect instance
+    # must have the strimzi.io/use-connector-resources annotation
+    # set to true.
+    strimzi.io/cluster: {{ .Values.kafka_connect_cluster_name }}}
+  annotations:
+    strimzi.io/use-connector-resources: "true"
+spec:
+  class: io.debezium.connector.mysql.MySqlConnector
+  tasksMax: 1
+  config:
+    errors.log.enable: "true"
+    errors.log.include.messages: "true"
+    database.hostname: {{ .Values.mysql_host }}
+    database.password: {{ .Values.mysql_password }}
+    database.port: {{ .Values.mysql_port }}}
+    database.server.id: {{ .Values.mysql_server_id }}}
+    database.user: {{ .Values.mysql_user }}
+    database.whitelist: {{ .Values.mysql_database_whitelist }}
+    errors.log.enable: "true"
+    errors.log.include.messages: "true"
+    include.schema.changes: "true"
+    schema.history.internal.kafka.bootstrap.servers: {{ .Values.kafka_cluster_bootstrap_servers_svc_name }}:9092
+    schema.history.internal.kafka.topic: schema-changes.{{ .Values.job_name }}
+    snapshot.locking.mode: none
+    snapshot.mode: schema_only
+    table.include.list: {{ .Values.mysql_table_whitelist }}}
+    tombstones.on.delete: "true"
+    topic.prefix: {{ .Values.job_name }}
+    transforms: unwrap
+    transforms.unwrap.add.fields: source.ts_ms
+    transforms.unwrap.drop.tombstones: "false"
+    transforms.unwrap.type: io.debezium.transforms.ExtractNewRecordState
+
