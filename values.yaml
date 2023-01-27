@@ -5,11 +5,21 @@
 
 job_name: nil
 kafka_connect_cluster_name: nil
-kafka_cluster_bootstrap_servers_svc_name: nil
-mysql_host: nil
-mysql_password: nil
-mysql_port: nil
-mysql_server_id: nil
-mysql_user: nil
-mysql_database_whitelist: nil
-mysql_table_whitelist: nil
+config:
+  database:
+    hostname: nil
+    password: nil
+    port: 3306
+    server:
+      id: nil
+    user: nil
+    whitelist: nil
+  schema:
+    history:
+      internal:
+        kafka:
+          bootstrap:
+            servers: nil
+  table:
+    include:
+      list: nil

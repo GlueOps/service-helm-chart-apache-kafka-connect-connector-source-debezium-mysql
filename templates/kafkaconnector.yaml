@@ -19,20 +19,20 @@ spec:
   config:
     errors.log.enable: "true"
     errors.log.include.messages: "true"
-    database.hostname: {{ .Values.mysql_host }}
-    database.password: {{ .Values.mysql_password }}
-    database.port: {{ .Values.mysql_port }}}
-    database.server.id: {{ .Values.mysql_server_id }}}
-    database.user: {{ .Values.mysql_user }}
-    database.whitelist: {{ .Values.mysql_database_whitelist }}
+    database.hostname: {{ .Values.config.database.hostname }}
+    database.password: {{ .Values.config.database.password }}
+    database.port: {{ .Values.config.database.port }}
+    database.server.id: {{ .Values.config.database.server.id }}
+    database.user: {{ .Values.config.database.user }}
+    database.whitelist: {{ .Values.config.database.whitelist }}
     errors.log.enable: "true"
     errors.log.include.messages: "true"
     include.schema.changes: "true"
-    schema.history.internal.kafka.bootstrap.servers: {{ .Values.kafka_cluster_bootstrap_servers_svc_name }}:9092
+    schema.history.internal.kafka.bootstrap.servers: {{ .Values.config.schema.history.internal.kafka.bootstrap.servers }}:9092
     schema.history.internal.kafka.topic: schema-changes.{{ .Values.job_name }}
     snapshot.locking.mode: none
     snapshot.mode: schema_only
-    table.include.list: {{ .Values.mysql_table_whitelist }}}
+    table.include.list: {{ .Values.config.table.include.list }}
     tombstones.on.delete: "true"
     topic.prefix: {{ .Values.job_name }}
     transforms: unwrap
