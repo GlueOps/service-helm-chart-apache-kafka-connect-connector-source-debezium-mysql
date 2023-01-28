@@ -1,0 +1,25 @@
+# Default values for hello-world.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+job_name: nil
+kafka_connect_cluster_name: nil
+config:
+  database:
+    hostname: nil
+    password: nil
+    port: 3306
+    server:
+      id: nil
+    user: nil
+    whitelist: nil
+  schema:
+    history:
+      internal:
+        kafka:
+          bootstrap:
+            servers: nil
+  table:
+    include:
+      list: nil
