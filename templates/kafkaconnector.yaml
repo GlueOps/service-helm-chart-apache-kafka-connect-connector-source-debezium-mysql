@@ -16,6 +16,8 @@ metadata:
 spec:
   class: io.debezium.connector.mysql.MySqlConnector
   tasksMax: 1
+  autoRestart:
+    enabled: true
   config:
     errors.log.enable: "true"
     errors.log.include.messages: "true"
