@@ -20,13 +20,10 @@ spec:
     errors.log.enable: "true"
     errors.log.include.messages: "true"
     database.hostname: {{ .Values.config.database.hostname }}
-    {{- if .Values.config.database.password | b64dec | ne "" }}
-      # Value is base64 encoded
-      {{- $decoded := .Values.config.database.password | b64dec -}}
-    database.password: {{ $decoded }}
-    {{- else }}
-      # Value is not base64 encoded
+    {{- if ne .Values.config.database.password "nil" }}
     database.password: {{ .Values.config.database.password }}
+    {{- else }}
+    database.password: {{ .Values.config.database.b64enc_k8s_path_to_password }}
     {{- end }}
     database.port: {{ .Values.config.database.port }}
     database.server.id: {{ .Values.config.database.server.id }}
