@@ -8,8 +8,7 @@ kafka_connect_cluster_name: nil
 config:
   database:
     hostname: nil
-    #password: nil
-    password: ${secrets:development/venkata-db-test:hostname}
+    password: nil
     port: 3306
     server:
       id: nil

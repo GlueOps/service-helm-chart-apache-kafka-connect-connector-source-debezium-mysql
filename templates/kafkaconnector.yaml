@@ -20,10 +20,11 @@ spec:
     errors.log.enable: "true"
     errors.log.include.messages: "true"
     database.hostname: {{ .Values.config.database.hostname }}
-    {{- if ne .Values.config.database.password "nil" }}
-    database.password: {{ .Values.config.database.password }}
+
+    {{- if hasPrefix "secrets:" .Values.config.database.password }}
+    database.password: ${{ `{` }}{{ .Values.config.database.password }}{{ `}`}}
     {{- else }}
-    database.password: {{ .Values.config.database.b64enc_k8s_path_to_password }}
+    database.password: {{ .Values.config.database.password }}
     {{- end }}
     database.port: {{ .Values.config.database.port }}
     database.server.id: {{ .Values.config.database.server.id }}
