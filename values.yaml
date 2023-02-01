@@ -4,6 +4,7 @@
 
 
 job_name: nil
+auto_restart_enabled: true
 kafka_connect_cluster_name: nil
 vault_path: nil
 config:
