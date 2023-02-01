@@ -20,9 +20,8 @@ spec:
     errors.log.enable: "true"
     errors.log.include.messages: "true"
     database.hostname: {{ .Values.config.database.hostname }}
-
-    {{- if hasPrefix "secrets:" .Values.config.database.password }}
-    database.password: ${{ `{` }}{{ .Values.config.database.password }}{{ `}`}}
+    {{- if hasPrefix "secrets:" .Values.config.database.password_from_secret }}
+    database.password: ${{ `{` }}{{ .Values.config.database.password_from_secret }}{{ `}`}}
     {{- else }}
     database.password: {{ .Values.config.database.password }}
     {{- end }}

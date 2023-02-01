@@ -9,6 +9,7 @@ config:
   database:
     hostname: nil
     password: nil
+    password_from_secret: nil
     port: 3306
     server:
       id: nil
