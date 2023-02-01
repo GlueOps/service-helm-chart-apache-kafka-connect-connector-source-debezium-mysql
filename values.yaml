@@ -5,11 +5,11 @@
 
 job_name: nil
 kafka_connect_cluster_name: nil
+vault_path: nil
 config:
   database:
     hostname: nil
     password: nil
-    password_from_secret: nil
     port: 3306
     server:
       id: nil
